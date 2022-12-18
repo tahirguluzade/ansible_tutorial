@@ -24,4 +24,8 @@ ansible all --key-file -i <inventory file> -m ping
 #18.216.214.157 ansible_user=<username of server>
 #3.131.160.87   ansible_user=<username of server>
 #18.219.133.241 ansible_user=<username of server>
-
+##############################
+##
+#to install packages for all servers using ansible 
+ansible all -m yum -a name=packagename --become --ask-become-pass
+#then enter and type password of root
