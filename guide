@@ -1,0 +1,9 @@
+#deploying git repository to linux machine
+#create ssh key in github account
+git clone <url which cloned with ssh>
+#telling to git who we are
+git config --global user.name "username"
+git config --global user.email "email address"
+#All this information is stored under ~/.gitconfig file
+git diff filename
+git add filename
