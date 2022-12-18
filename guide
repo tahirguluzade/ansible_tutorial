@@ -17,7 +17,7 @@ git push origin <branch name (main, master)>
 
 
 
-####################################################333
+####################################################
 #to ping all servers at the same time
 ansible all --key-file -i <inventory file> -m ping
 #sometimes it can be give error, so then you need to specify user names in inventory file
