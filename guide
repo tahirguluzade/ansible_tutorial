@@ -5,5 +5,13 @@ git clone <url which cloned with ssh>
 git config --global user.name "username"
 git config --global user.email "email address"
 #All this information is stored under ~/.gitconfig file
+#######3
+#show difference that what changed
 git diff filename
+#add file
 git add filename
+#adding commit message
+git commit -m "type comment"
+#pushing changes to origin 
+git push origin <branch name (main, master)>
+  
