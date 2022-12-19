@@ -1,3 +1,4 @@
-18.216.214.157 ansible_user=centos
-3.131.160.87   ansible_user=centos
-3.16.24.81     ansible_user=centos
+18.188.94.153    ansible_user=centos
+18.219.189.153   ansible_user=centos
+18.191.90.116    ansible_user=centos
+18.222.36.235    ansible_user=ubuntu

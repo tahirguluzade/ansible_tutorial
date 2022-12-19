@@ -4,6 +4,11 @@
   become: true
   tasks:
 
+  - name: update repository
+    yum:
+      update_cache: yes
+
   - name: install apache webserver
     yum:
       name: httpd
+      state: latest
