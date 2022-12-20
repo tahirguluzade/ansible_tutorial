@@ -4,11 +4,35 @@
   become: true
   tasks:
 
-  - name: update repository
+  - name: installing update for centos
     yum:
+      update_only: yes
       update_cache: yes
+    when: ansible_distribution == "CentOS"
 
-  - name: install apache webserver
+  - name: installing updates for  ubuntu
+    apt:
+       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+ 
+
+  
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache webserver and git for CentOS
     yum:
-      name: httpd
+      name: 
+         - httpd
+         - git 
       state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: installing apache webserver and git for  Ubuntu based servers
+    apt: 
+      name: 
+         - apache2
+         - git-all
+      state: latest
+    when: ansible_distribution == "Ubuntu"
