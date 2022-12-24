@@ -1,4 +1,4 @@
-#FAILED! => {"changed": false, "msg": "No package matching 'nginx' found available, installed or updated", "rc": 126, "results": ["No package matching 'nginx' found available, installed or updated"]}
+FAILED! => {"changed": false, "msg": "No package matching 'nginx' found available, installed or updated", "rc": 126, "results": ["No package matching 'nginx' found available, installed or updated"]}
 #that eror means Nginx is not available in the standard repositories of CentOS. You need first to enable the EPEL repo to install nginx
 # so add below task to your ansible-playbook
 
