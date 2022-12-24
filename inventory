@@ -1,6 +1,7 @@
 [web_servers]
-18.188.94.153    ansible_user=centos  apache_package=httpd git_package=git
-18.222.36.235    ansible_user=ubuntu  apache_package=apache2 git_package=git-all
+18.118.107.161   ansible_user=centos  apache_package=httpd git_package=git
+18.222.201.107   ansible_user=ubuntu  apache_package=apache2 git_package=git-all
 
 [file_servers]
-18.191.90.116    ansible_user=centos  apache_package=httpd git_package=git
+18.191.197.211   ansible_user=centos  apache_package=httpd git_package=git
+3.17.24.229   ansible_user=centos  apache_package=httpd git_package=git
