@@ -1,0 +1,32 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+
+  - name: update repository
+    yum:
+      update_cache: true
+    when: ansible_distribution == "CentOS"
+
+
+  - name: installing epel-release
+    yum:
+      name: epel-release
+    when: ansible_distribution == "CentOS"
+
+
+  - name: installing nginx web server in CentOS based servers
+    yum:
+      name: nginx
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+
+  - name: installing nginx web server in ubunutu based servers
+    apt:
+      update_cache: yes
+      name: nginx
+      state: latest
+    when: ansible_distribution == "Ubuntu"
