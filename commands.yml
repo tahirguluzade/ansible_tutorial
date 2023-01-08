@@ -2,14 +2,14 @@
 
 - hosts: all
   tasks:
+  become: true
 
 
   - name: Running Following commands just for testing
-    command: “{{ item }}”
-    loop:
-      - cd /root/bugx_wepapp
-      - systemctl start bugx
-      - cd /root
-      - mkdir ansible_testtako
-      - cd /root/ansible_testing
-      - touch tako
+    shell: |
+      cd /root/bugx_wepapp
+      systemctl start bugx
+      cd /root
+      mkdir ansible_testtako
+      cd /root/ansible_testing
+      touch tako
