@@ -14,8 +14,3 @@
        cd /root/ansible_testing
        touch tako 
        ll /root/bugx_wepapp > tako
-    register: displayfile
-      
-  - debug:
-      msg: "{{ displayfile.stdout_lines }}"
-    when: ansible_distribution == "CentOS"
