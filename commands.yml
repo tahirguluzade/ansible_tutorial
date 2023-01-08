@@ -4,12 +4,11 @@
   tasks:
   become: true
 
-
-  - name: Running Following commands just for testing
-     shell: |
-       cd /root/bugx_wepapp
-       systemctl start bugx
-       cd /root
-       mkdir ansible_testtako
-       cd /root/ansible_testing
-       touch tako
+    - name: Running Following commands just for testing
+      shell: |
+        cd /root/bugx_wepapp
+        systemctl start bugx
+        cd /root
+        mkdir ansible_testtako
+        cd /root/ansible_testing
+        touch tako
