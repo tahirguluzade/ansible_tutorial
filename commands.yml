@@ -16,5 +16,5 @@
     - touch tako 
     - ls -l /root/bugx_wepapp > tako
     register: command_result
-  – debug: 
+  - debug: 
       msg: "{{ command_result.stdout_lines }}"
