@@ -15,5 +15,6 @@
     - cd /root/ansible_testing
     - touch tako 
     - ls -l /root/bugx_wepapp > tako
-    register: reg_out
-    – debug: msg=”{{ reg_out.results | map (attribute=’stdout_lines’) | list }}”
+    register: command_result
+  – debug: 
+      msg: "{{ command_result.stdout_lines }}"
