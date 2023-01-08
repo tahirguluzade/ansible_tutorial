@@ -5,7 +5,7 @@
   become: true
 
 
-   - name: Running Following commands just for testing
+  - name: Running Following commands just for testing
      shell: |
        cd /root/bugx_wepapp
        systemctl start bugx
