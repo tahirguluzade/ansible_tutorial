@@ -12,15 +12,37 @@
     shell: 
        "yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel"
   
+  - name: checking existance of folder
+    stat:
+      path: /root/rbenv
+    register: file_data
+
+  - name: report if directory exist
+    debug:
+      msg: "The directory exist"
+    when: file_data.stat.exists
+
   - name: clonning rbenv repos from github
     shell:
        "git clone https://github.com/rbenv/rbenv.git"
     args:
       chdir: /root 
+    when: not file_data.stat.exists
 
+  - name: checking existance of folder ~/.rbenv/plugins/ruby-build
+    stat:
+      path: /root/.rbenv/plugins/ruby-build
+    register: ruby_file
+
+  - name: report if file exist
+    debug:
+      msg: "The directory exist"
+    when: ruby_file.stat.exists
+  
   - name: clonnig ruby-build.git repo and forward it to ~/.rbenv/plugins/ruby-build
     shell:
        "git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build" 
+    when: not ruby_file.stat.exists
     
 
       
