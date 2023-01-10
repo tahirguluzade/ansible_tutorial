@@ -71,7 +71,6 @@
     shell: | 
       rpm -qa | grep rbnev 2.7.7
       rpm -qa | grep rbnev global 2.7.7
-    state: present
     register: rbnev_installed
     ignore_errors: true
     check_mode: yes
