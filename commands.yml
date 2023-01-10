@@ -16,5 +16,8 @@
     shell:
        cmd: "git clone https://github.com/rbenv/rbenv.git"
        cmd: "git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build" 
+    args:
+      chdir: /root 
+      
       
         
