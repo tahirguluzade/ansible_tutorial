@@ -4,15 +4,15 @@
   tasks:
   become: true
 
-    - name: Running Following commands just for testing
-      shell:
+  - name: running Following commands just for testing
+    shell:
          "touch tako"
-      args:
-        chdir: "/root/bugx_wepapp"
+    args:
+      chdir: "/root/bugx_wepapp"
 
-    - name: new command
-      shell:
+  - name: new command
+    shell:
          "cat passwd > /root/bugx_wepapp/tako"
-      args:
-        chdir: "/etc"   
+    args:
+      chdir: "/etc"   
         
