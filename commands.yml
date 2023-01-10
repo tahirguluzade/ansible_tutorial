@@ -5,10 +5,14 @@
   become: true
 
     - name: Running Following commands just for testing
-      shell: |
-        cd /root/bugx_wepapp
-        systemctl start bugx
-        cd /root
-        mkdir ansible_testtako
-        cd /root/ansible_testing
-        touch tako
+      shell:
+         "touch tako"
+      args:
+        chdir: "/root/bugx_wepapp"
+
+    - name: new command
+      shell:
+         "cat passwd > /root/bugx_wepapp/tako"
+      args:
+        chdir: "/etc"   
+        
