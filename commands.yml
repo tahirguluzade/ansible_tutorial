@@ -5,14 +5,7 @@
   tasks:
 
   - name: running Following commands just for testing
-    shell:
-         "touch tako"
-    args:
-      chdir: "/root/bugx_wepapp"
-
-  - name: new command
-    shell:
-         "cat passwd > /root/bugx_wepapp/tako"
-    args:
-      chdir: "/etc"   
+    shell: |
+       "touch /root/alimadat"
+       "ls -l /etc/passwd > /root/alimadat"  
         
