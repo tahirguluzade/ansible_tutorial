@@ -68,9 +68,9 @@
        "yum install perl -y"
 
   - name: installing rbenv
-    shell:
-       "rbenv install 2.7.7"
-       "rbenv global 2.7.7"
+    shell: |
+      rbenv install 2.7.7
+      rbenv global 2.7.7
 
   - name: installing rubygem-bundler
     shell: 
