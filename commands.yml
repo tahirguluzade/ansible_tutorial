@@ -102,11 +102,14 @@
     
 
   - name: clonnig bugx webapp files
+    shell:
+       "mkdir /root/bugx"
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
       dest: /root/
     when: not bugx_data.stat.exists
+    
     
   
   - name: adding env varibales to .bash_profile for running command without error
