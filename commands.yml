@@ -90,15 +90,27 @@
     shell: 
        "yum install rubygem-bundler -y"
   
+  - name: checking existance of bugx folder
+    stat:
+      path: /root/bugx
+    register: bugxfolder_data
+
+
+  - name: creating /root/bugx
+    shell:
+       "mkdir /root/bugx"
+    when: not bugxfolder_data.stat.exists
+
+
   - name: Deploying app
     shell: |
       useradd brew-user
       usermod -aG root brew-user
-      mkdir /root/bugx
+
 
   - name: checking existance of bugx_wepapp folder
     stat:
-      path: /root/bugx_wepapp
+      path: /root/bugx/bugx_wepapp
     register: bugx_data
     
 
@@ -106,7 +118,7 @@
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
-      dest: /root/bugx
+      dest: /root/bugx/
     when: not bugx_data.stat.exists
     
     
