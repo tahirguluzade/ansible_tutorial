@@ -94,7 +94,17 @@
     shell: |
       useradd brew-user
       usermod -aG root brew-user
-      git clone git@github.com:EshginGuluzade/bugx_wepapp.git
+
+  - name: checking existance of bugx_wepapp folder
+    stat:
+      path: /root/bugx_wepapp
+    register: bugx_data
+    
+
+  - name: clonnig bugx webapp files
+    shell:
+      "git clone git@github.com:EshginGuluzade/bugx_wepapp.git"
+    when: not bugx_data.stat.exists
     
   
   - name: adding env varibales to .bash_profile for running command without error
