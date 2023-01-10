@@ -56,11 +56,24 @@
     shell:  
        echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
        echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-       source ~/.bashrc
+       "source /root/.bashrc"
     when: conf is not changed
     
   - debug:
       msg: "varibale exist"
     when: conf is changed
+
+  - name: installing perl
+    shell:
+       "yum install perl -y"
+
+  - name: installing rbenv
+    shell:
+       "rbenv install 2.7.7"
+       "rbenv global 2.7.7"
+
+  - name: installing rubygem-bundler
+    shell: 
+       "yum install rubygem-bundler -y"
 
         
