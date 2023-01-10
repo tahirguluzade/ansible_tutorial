@@ -44,12 +44,17 @@
        "git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build" 
     when: not ruby_file.stat.exists
 
+  - name: searching string
+    resgister: env
+    shell: 
+       "cat /.bashrc"
  
   - name: Building environment for rbuy
     shell:  
-       echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-       echo 'eval "$(rbenv init -)"' >> ~/.bashrc 
-       source ~/.bashrc
-    when: PATH != '$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH'
-      
+       echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc'
+    when: ' "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH" in not env.stdout'
+    
+  - debug:
+      msg: "varibale exist"
+    when:  ' "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH" in env.stdout'
         
