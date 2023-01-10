@@ -101,7 +101,7 @@
        "mkdir /root/bugx_wepapp/"
     when: not bugxfolder_data.stat.exists
 
- - name: check if brew-user already exist
+  - name: check if brew-user already exist
     shell: | 
       cat /etc/passwd | grep brew-user
       id brew-user | grep root 
