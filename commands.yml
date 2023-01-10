@@ -142,7 +142,7 @@
     shell: |
       echo "export GEM_HOME=$HOME/.gem" >> .bash_profile
       echo "export PATH=$PATH:$HOME/.gem"/bin >> .bash_profile
-      echo "export PATH=$PATH:$HOME/.gem/ruby//bin" >> .bash_profile
+      echo "export PATH=$PATH:$HOME/.gem/ruby/*" >> .bash_profile
       source /home/brew-user/.bash_profile
     when: envvar is not changed 
     args:
@@ -151,8 +151,9 @@
   - name: giving permission to user for accesing /root/.rbenv/versions
     shell: |
       chown -R brew-user:brew-user /root/.rbenv/versions/
-      chown -R brew-user:brew-user /Library/Ruby/Gems  
+      chown -R brew-user:brew-user /Library/Ruby/Gems/*
       chown -R brew-user:brew-user /usr/local/*
+      chown -R brew-user:brew-user /Users/me/.rbenv/*
     args:
       chdir: /root/
 
