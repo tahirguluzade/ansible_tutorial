@@ -45,9 +45,10 @@
     when: not ruby_file.stat.exists
 
   - name: searching string
-    lineinfile: "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-    name: /root/.bashrc
-    state: absent
+    lineinfile: 
+      name: /root/.bashrc
+      line: "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+      state: absent
     check_mode: yes
     register: conf
  
