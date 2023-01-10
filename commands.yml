@@ -94,6 +94,7 @@
     shell: |
       useradd brew-user
       usermod -aG root brew-user
+      mkdir /root/bugx
 
   - name: checking existance of bugx_wepapp folder
     stat:
@@ -102,12 +103,10 @@
     
 
   - name: clonnig bugx webapp files
-    shell:
-       "mkdir /root/bugx"
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
-      dest: /root/
+      dest: /root/bugx
     when: not bugx_data.stat.exists
     
     
