@@ -101,11 +101,19 @@
        "mkdir /root/bugx_wepapp/"
     when: not bugxfolder_data.stat.exists
 
+ - name: check if brew-user already exist
+    shell: | 
+      cat /etc/passwd | grep brew-user
+      id brew-user | grep root 
+    register: user_exists
+    ignore_errors: true
+    check_mode: yes
 
   - name: Deploying app
     shell: |
       useradd brew-user
       usermod -aG root brew-user
+    when: user_exists is changed
 
 
   - name: checking existance of bugx_wepapp folder
@@ -122,13 +130,21 @@
     when: bugx_data.stat.exists
     
     
-  
+  - name: searching string
+    lineinfile: 
+      name: /home/brew-user/.bash_profile
+      line: "GEM_HOME=$HOME/.gem \n PATH=$PATH:$HOME/.gem"/bin \n PATH=$PATH:$HOME/.gem/ruby//bin" 
+      state: absent
+    check_mode: yes
+    register: envvar
+ 
   - name: adding env varibales to .bash_profile for running command without error
     shell: |
       echo "export GEM_HOME=$HOME/.gem" >> .bash_profile
       echo "export PATH=$PATH:$HOME/.gem"/bin >> .bash_profile
       echo "export PATH=$PATH:$HOME/.gem/ruby//bin" >> .bash_profile
       source /home/brew-user/.bash_profile
+    when: envvar is not changed 
     args:
       chdir: /home/brew-user/
  
@@ -140,9 +156,12 @@
 
 
   - name: installing bundle as a brew-user 
-    shell: |
-      su -c 'bundle install' brew-user
-      bundle exec jekyll serve --host 0.0.0.0
+    shell: 
+       "su -c 'bundle install' brew-user"
+
+  - name: bundle exec jekyll serve
+    shell: 
+       "bundle exec jekyll serve --host 0.0.0.0"
     args:
       chdir: /root/bugx_wepapp/
 
