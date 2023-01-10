@@ -103,7 +103,7 @@
 
   - name: clonnig bugx webapp files
     ansible.builtin.git:
-      repo: git clone git@github.com:EshginGuluzade/bugx_wepapp.git
+      repo: git@github.com:EshginGuluzade/bugx_wepapp.git
       dest: /root
     when: not bugx_data.stat.exists
     
