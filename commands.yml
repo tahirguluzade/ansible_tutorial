@@ -48,8 +48,8 @@
     lineinfile: "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
     name: /root/.bashrc
     state: absent
-  check_mode: yes
-  register: conf
+    check_mode: yes
+    register: conf
  
   - name: Building environment for rbuy
     shell:  
