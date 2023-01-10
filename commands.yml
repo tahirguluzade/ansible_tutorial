@@ -67,10 +67,25 @@
     shell:
        "yum install perl -y"
 
+  - name: check if rbenv already exist
+    shell: | 
+      rpm -qa | grep rbnev 2.7.7
+      rpm -qa | grep rbnev global 2.7.7
+    state: present
+    register: rbnev_installed
+    ignore_errors: true
+    check_mode: yes
+
   - name: installing rbenv
     shell: |
       rbenv install 2.7.7
       rbenv global 2.7.7
+    when: rbnev_installed is changed
+
+
+  - debug:
+      msg: "rbenv 2.7.7 and global exist"
+    when: rbnev_installed is not changed
 
   - name: installing rubygem-bundler
     shell: 
