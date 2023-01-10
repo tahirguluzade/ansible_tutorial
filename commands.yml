@@ -150,10 +150,9 @@
  
   - name: giving permission to user for accesing /root/.rbenv/versions
     shell: |
-      chown -R brew-user:brew-user /root/.rbenv/versions/
+      chown -R brew-user:brew-user /root/.rbenv/versions/*
       chown -R brew-user:brew-user /Library/Ruby/Gems/*
       chown -R brew-user:brew-user /usr/local/*
-      chown -R brew-user:brew-user /Users/me/.rbenv/*
     args:
       chdir: /root/
 
@@ -161,6 +160,8 @@
   - name: installing bundle as a brew-user 
     shell: 
        "su -c 'bundle install' brew-user"
+    args:
+      chdir: /root/bugx_wepapp/
 
   - name: bundle exec jekyll serve
     shell: 
