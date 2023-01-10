@@ -57,10 +57,10 @@
        echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
        echo 'eval "$(rbenv init -)"' >> ~/.bashrc
        source ~/.bashrc
-    when: conf is changed
+    when: conf is not changed
     
   - debug:
       msg: "varibale exist"
-    when: conf is not changed
+    when: conf is changed
 
         
