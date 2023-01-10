@@ -42,7 +42,7 @@
   - name: clonnig ruby-build.git repo and forward it to ~/.rbenv/plugins/ruby-build
     shell:
        "git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build" 
-    when: not ruby_file.stat.exists\
+    when: not ruby_file.stat.exists
 
   - name: Building environment for rbuy
     shell:  
