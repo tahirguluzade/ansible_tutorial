@@ -47,7 +47,7 @@
   - name: searching string
     register: env
     shell: 
-       "cat /.bashrc"
+       "cat /root/.bashrc"
  
   - name: Building environment for rbuy
     shell:  
