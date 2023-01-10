@@ -53,10 +53,10 @@
     register: conf
  
   - name: Building environment for rbuy
-    shell:  
-       echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-       echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-       "source /root/.bashrc"
+    shell:  |
+      echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+      echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+      source /root/.bashrc
     when: conf is not changed
     
   - debug:
@@ -75,5 +75,77 @@
   - name: installing rubygem-bundler
     shell: 
        "yum install rubygem-bundler -y"
+  
+  - name: Deploying app
+    shell: |
+      useradd brew-user
+      usermod -aG root brew-user
+      git clone git@github.com:EshginGuluzade/bugx_wepapp.git
+    
+  
+  - name: adding env varibales to .bash_profile for running command without error
+    shell: |
+      echo "export GEM_HOME=$HOME/.gem" >> .bash_profile
+      echo "export PATH=$PATH:$HOME/.gem"/bin >> .bash_profile
+      echo "export PATH=$PATH:$HOME/.gem/ruby//bin" >> .bash_profile
+      source /home/brew-user/.bash_profile
+    args:
+      chdir: /home/brew-user/
+ 
+  - name: giving permission to user for accesing /root/.rbenv/versions
+    shell:
+       "chown -R brew-user:brew-user /root/.rbenv/versions/" 
+    args:
+      chdir: /root/
+
+
+  - name: installing bundle as a brew-user 
+    shell: |
+      su -c 'bundle install' brew-user
+      bundle exec jekyll serve --host 0.0.0.0
+    args:
+      chdir: /root/bugx_wepapp/
+
+
+  - name: creating bugx service
+    copy:
+      src: /root/bugx.service/
+      dest: /etc/systemd/system/
+
+
+  - name: adding httpd server and opening port number 4000 for service
+    shell: |
+      systemctl enable firewalld
+      systemctl start firewalld
+      firewall-cmd --zone=public --add-service=http
+      firewall-cmd --reload
+      firewall-cmd --zone=public --permanent --add-port=4000/tcp
+      firewall-cmd --reload
+      systemctl restart firewalld
+
+  - name: enable and start bugx server
+    shell: |
+      systemctl daemon-reload
+      systemctl enable bugx
+      systemctl restart bugx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    
 
         
