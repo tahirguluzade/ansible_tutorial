@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+  - name: bundle exec jekyll serve
+    shell: 
+       "bundle exec jekyll serve --host 0.0.0.0"
+    args:
+      chdir: /root/bugx_wepapp/
