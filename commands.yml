@@ -92,13 +92,13 @@
   
   - name: checking existance of bugx folder
     stat:
-      path: /root/bugx
+      path: /root/bugx_wepapp/
     register: bugxfolder_data
 
 
-  - name: creating /root/bugx
+  - name: creating /root/bugx_wepapp
     shell:
-       "mkdir /root/bugx"
+       "mkdir /root/bugx_wepapp/"
     when: not bugxfolder_data.stat.exists
 
 
@@ -110,7 +110,7 @@
 
   - name: checking existance of bugx_wepapp folder
     stat:
-      path: /root/bugx/bugx_wepapp
+      path: /root/bugx_wepapp/
     register: bugx_data
     
 
@@ -118,8 +118,8 @@
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
-      dest: /root/bugx/
-    when: not bugx_data.stat.exists
+      dest: /root/bugx_wepapp/
+    when: bugx_data.stat.exists
     
     
   
@@ -144,7 +144,7 @@
       su -c 'bundle install' brew-user
       bundle exec jekyll serve --host 0.0.0.0
     args:
-      chdir: /root/bugx/bugx_wepapp/
+      chdir: /root/bugx_wepapp/
 
 
   - name: creating bugx service
