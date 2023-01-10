@@ -132,7 +132,7 @@
       su -c 'bundle install' brew-user
       bundle exec jekyll serve --host 0.0.0.0
     args:
-      chdir: /root/bugx_wepapp/
+      chdir: /root/bugx/bugx_wepapp/
 
 
   - name: creating bugx service
