@@ -32,3 +32,7 @@
       chown -R brew-user:brew-user /usr/local/*
     args:
       chdir: /root/
+
+  - name: installing bundle as a brew-user 
+    shell: 
+       "su -c 'bundle install' brew-user"
