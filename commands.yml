@@ -4,8 +4,13 @@
   become: true
   tasks:
 
-  - name: running Following commands just for testing
-    shell: |
-       "touch /root/alimadat"
-       "ls -l /etc/passwd > /root/alimadat"  
+  - name: to enbale powertools for libyaml-devel
+    shell:
+       "dnf -y config-manager --set-enabled powertools"
+   
+  - name: cowsay
+    shell: 
+       "echo "powertools enabled succesfully"|cowsay"
+    
+      
         
