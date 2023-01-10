@@ -45,16 +45,18 @@
     when: not ruby_file.stat.exists
 
   - name: searching string
-    register: env
-    shell: 
-       "cat /root/.bashrc"
+    lineinfile: "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+    name: /root/.bashrc
+    state: absent
+  check_mode: yes
+  register: conf
  
   - name: Building environment for rbuy
     shell:  
        echo 'export PATH="$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-    when: '"$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH" in not env.stdout'
+    when: conf is changed
     
   - debug:
       msg: "varibale exist"
-    when:  ' "$HOME/rbenv/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$PATH" in env.stdout'
+    when: conf is not changed
         
