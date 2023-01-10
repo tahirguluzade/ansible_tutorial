@@ -1,0 +1,34 @@
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+
+  - name: searching string
+    lineinfile: 
+      name: /home/brew-user/.bash_profile
+      line: "GEM_HOME=$HOME/.gem \n PATH=$PATH:$HOME/.gem/bin \n PATH=$PATH:$HOME/.gem/ruby//bin" 
+      state: absent
+    check_mode: yes
+    register: envvar
+ 
+  - name: adding env varibales to .bash_profile for running command without error
+    shell: |
+      echo "export GEM_HOME=$HOME/.gem" >> .bash_profile
+      echo "export PATH=$PATH:$HOME/.gem"/bin >> .bash_profile
+      echo "export PATH=$PATH:$HOME/.gem/ruby/*" >> .bash_profile
+      source /home/brew-user/.bash_profile
+    when: envvar is not changed 
+    args:
+      chdir: /home/brew-user/
+ 
+  - name: giving permission to user for accesing /root/.rbenv/versions
+    shell: |
+      chown -R brew-user:brew-user /root/.rbenv/versions/*
+      chown -R brew-user:brew-user /Library/Ruby/Gems/*
+      chown -R brew-user:brew-user /usr/local/*
+    args:
+      chdir: /root/
