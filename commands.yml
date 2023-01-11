@@ -102,12 +102,14 @@
     when: not bugxfolder_data.stat.exists
 
   - name: check if brew-user already exist
-    shell: | 
-      cat /etc/passwd | grep brew-user
-      id brew-user | grep root 
-    register: user_exists
-    ignore_errors: true
-    check_mode: yes
+    ansible.builtin.getent:
+      database: passwd
+      key: brew
+      fail_key: False
+
+  - debug:
+      msg: " brew-user does not exist so creating it"
+    
 
   - name: Deploying app
     shell: |
