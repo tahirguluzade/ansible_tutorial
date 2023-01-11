@@ -155,6 +155,7 @@
       chown -R brew-user:brew-user /Library/Ruby/Gems/*
       chown -R brew-user:brew-user /usr/local/*
       chown -R brew-user:brew-user /usr/share/*
+      bundle update --bundler
     args:
       chdir: /root/
 
