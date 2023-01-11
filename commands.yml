@@ -153,7 +153,8 @@
     shell: |
       chown -R brew-user:brew-user /root/.rbenv/versions/
       chown -R brew-user:brew-user /usr/local/*
-      bundle update --bundler2
+      gem install bundler:2.0.1
+      bundle update --bundler
     args:
       chdir: /root/bugx_wepapp/
     
