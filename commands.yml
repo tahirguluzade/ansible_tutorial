@@ -166,14 +166,21 @@
   - name: bundle exec jekyll serve
     shell: 
        "bundle exec jekyll serve --host 0.0.0.0"
+    async: 30
+    poll: 0
     args:
       chdir: /root/bugx_wepapp/
 
+  - name: checking existance of bugx.service
+    stat:
+      path: /etc/systemd/system/bugx.service
+    register: bugx_service
 
   - name: creating bugx service
     copy:
       src: /root/bugx.service/
       dest: /etc/systemd/system/
+    when: not bugx_service.stat.exists
 
 
   - name: adding httpd server and opening port number 4000 for service
