@@ -154,6 +154,8 @@
       chown -R brew-user:brew-user /root/.rbenv/versions/
       chown -R brew-user:brew-user /usr/local/*
       bundle update --bundler
+    args:
+      chdir: /root/bugx_wepapp/
     
 
 
