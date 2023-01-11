@@ -128,7 +128,7 @@
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
       dest: /root/bugx_wepapp/
-    when: bugx_data.stat.exists
+    when: not bugx_data.stat.exists
     
     
   - name: searching string
