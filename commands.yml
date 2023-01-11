@@ -154,6 +154,7 @@
       chown -R brew-user:brew-user /root/.rbenv/versions/*
       chown -R brew-user:brew-user /Library/Ruby/Gems/*
       chown -R brew-user:brew-user /usr/local/*
+      chown -R brew-user:brew-user /usr/share/*
     args:
       chdir: /root/
 
