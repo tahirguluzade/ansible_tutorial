@@ -5,15 +5,30 @@
   tasks:
 
 
-  - name: bundle exec jekyll serve
-    shell: 
-       "bundle exec jekyll serve --host 0.0.0.0"
-    async: 25
-    poll: 0
-    args:
-      chdir: /root/bugx_wepapp/
+  - name: enable and start firewalld
+    shell: |
+      systemctl enable firewalld
+      systemctl start firewalld
 
-  - name: creating bugx service
-    copy:
-      src: /root/bugx.service/
-      dest: /etc/systemd/system/    
+  - name: permit traffic in default zone for http service
+    ansible.posix.firewalld:
+      service: http
+      permanent: yes
+      state: enabled
+
+  - name: permit traffic in default zone on port 4000/tcp
+    ansible.posix.firewalld:
+      port: 4000/tcp
+      permanent: yes
+      state: enabled
+
+  - name: reload firewalld
+    shell: |
+      firewall-cmd --reload
+      systemctl restart firewalld
+
+  - name: enable and start bugx server
+    shell: |
+      systemctl daemon-reload
+      systemctl enable bugx
+      systemctl restart bugx
