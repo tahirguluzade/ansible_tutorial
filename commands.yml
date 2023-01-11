@@ -115,7 +115,6 @@
     shell: |
       useradd brew-user
       usermod -aG root brew-user
-    when: user_exists is changed
 
 
   - name: checking existance of bugx_wepapp folder
