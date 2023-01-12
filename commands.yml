@@ -194,24 +194,6 @@
 
 
 
-  - name: permit traffic in default zone on port 4000/tcp
-    ansible.posix.firewalld:
-      port: 4000/tcp
-      permanent: yes
-      state: enabled
-
-  - name: reload firewalld
-    shell: |
-      firewall-cmd --reload
-      systemctl restart firewalld
-
-  - name: enable and start bugx server
-    shell: |
-      systemctl daemon-reload
-      systemctl enable bugx
-      systemctl restart bugx
-
-
 
 
 
