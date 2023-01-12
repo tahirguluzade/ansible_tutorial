@@ -134,7 +134,7 @@
   - name: searching string
     lineinfile: 
       name: /home/brew-user/.bash_profile
-      line: "GEM_HOME=$HOME/.gem \n PATH=$PATH:$HOME/.gem/bin \n PATH=$PATH:$HOME/.gem/ruby//bin" 
+      line: "GEM_HOME=/root/.gem \n PATH=/.gem/bin \n PATH=/.gem/ruby/bin" 
       state: absent
     check_mode: yes
     register: envvar
@@ -151,7 +151,7 @@
  
   - name: giving permission to user for accesing /root/.rbenv/versions
     shell: |
-      chown -R brew-user:brew-user /root/.rbenv/versions/*
+      chown -R brew-user:brew-user /root/.rbenv/*
       chown -R brew-user:brew-user /usr/local/*
       chown -R brew-user:brew-user /usr/share/gems/*
     args:
