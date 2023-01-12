@@ -151,12 +151,12 @@
  
   - name: giving permission to user for accesing /root/.rbenv/versions
     shell: |
-      chown -R brew-user:brew-user /root/.rbenv/versions/
+      chown -R brew-user:brew-user /root/.rbenv/versions/*
       chown -R brew-user:brew-user /usr/local/*
-      gem install bundler:2.0.1
-      bundle update --bundler
+      chown -R brew-user:brew-user /usr/share/gems/*
     args:
       chdir: /root/bugx_wepapp/
+    tags: tag1
     
 
 
