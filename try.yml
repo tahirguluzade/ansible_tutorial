@@ -6,10 +6,10 @@
 
 
   - name:
-  ansible.builtin.blockinfile:
-  path: /etc/nginx/nginx.conf
-  block: |
-    server {
+    ansible.builtin.blockinfile:
+      path: /etc/nginx/nginx.conf
+      block: |
+        server {
             listen 80;
             server_name www.bugx.site;
             root /var/www/bugx_site;
@@ -20,15 +20,15 @@
             include fastcgi.conf;
             fastcgi_index index.php;
             fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
-       }
-    }
+         }
+        }
 
   - name: Replace between the expressions
-  ansible.builtin.replace:
-    path: /etc/nginx/nginx.conf
-    after: '# for more information.'
-    before: '# Settings for a TLS enabled server.'
-    regexp: ' listen       80 default_server;
+    ansible.builtin.replace:
+      path: /etc/nginx/nginx.conf
+      after: '# for more information.'
+      before: '# Settings for a TLS enabled server.'
+      regexp: ' listen       80 default_server;
         listen       [::]:80 default_server;
         server_name  _;
         root         /usr/share/nginx/html;
