@@ -23,35 +23,4 @@
          }
         }
 
-  - name: Replace between the expressions
-    ansible.builtin.replace:
-      path: /etc/nginx/nginx.conf
-      after: '# for more information.'
-      before: '# Settings for a TLS enabled server.'
-      regexp: ' listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  _;
-        root         /usr/share/nginx/html;
-
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
-
-        location / {
-        }
-
-        error_page 404 /404.html;
-            location = /40x.html {
-        }
-
-        error_page 500 502 503 504 /50x.html;
-            location = /50x.html {'
-    replace: 'listen 80;
-       server_name www.bugx.site;
-       root /var/www/bugx_site;
-       index index.html;
-       location ~ \.php$ {
-       try_files $uri =404;
-       fastcgi_split_path_info ^(.+\.php)(/.+)$;
-       include fastcgi.conf;
-       fastcgi_index index.php;
-       fastcgi_pass unix:/run/php-fpm/php-fpm.sock;'
+  
