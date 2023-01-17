@@ -115,12 +115,6 @@
     shell: |
       useradd brew-user
       usermod -aG root brew-user
-
-
-  - name: checking existance of bugx_wepapp folder
-    stat:
-      path: /root/bugx_wepapp/
-    register: bugx_data
     
 
   - name: clonnig bugx webapp files
@@ -128,7 +122,7 @@
       accept_hostkey: true
       repo: git@github.com:EshginGuluzade/bugx_wepapp.git
       dest: /root/bugx_wepapp/
-    when: not bugx_data.stat.exists
+  
     
     
   - name: searching string
