@@ -6,7 +6,7 @@
 
   - name: to enbale powertools for libyaml-devel
     shell:
-       "dnf -y config-manager --set-enabled powertools"
+       "dnf config-manager --set-enabled crb"
    
   - name:  install build dependencies
     shell: 
