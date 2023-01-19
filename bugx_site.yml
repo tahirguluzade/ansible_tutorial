@@ -12,7 +12,7 @@
     ignore_errors: yes
     check_mode: yes
 
-   - name: Installing http service
+  - name: Installing http service
     shell: 
        "yum install httpd -y"
     when: httpd_server is changed
@@ -21,7 +21,7 @@
     debug:
       msg: "The httpd server already exists, skipping to next task"
     when: httpd_server is not changed
-    
+
 
   - name: Check if nginx already exists
     shell:
