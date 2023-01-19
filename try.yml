@@ -9,6 +9,7 @@
   ansible.builtin.replace:
   path: /etc/nginx/nginx.conf
   regexp: 'listen       80 default_server;'
+  tags: tag1
 
             
   - name:
