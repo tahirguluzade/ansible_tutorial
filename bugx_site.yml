@@ -12,32 +12,34 @@
     ignore_errors: yes
     check_mode: yes
 
-  - name: report if httpd exists
-    debug:
-      msg: "The httpd server already exists, skipping to next task"
-    when: httpd_server is not changed
-
-  - name: Installing http service
+   - name: Installing http service
     shell: 
        "yum install httpd -y"
     when: httpd_server is changed
 
+  - name: report if httpd exists
+    debug:
+      msg: "The httpd server already exists, skipping to next task"
+    when: httpd_server is not changed
+    
+
   - name: Check if nginx already exists
     shell:
-        "rpm -qa | grep nginx"
+       "rpm -qa | grep nginx"
     register: nginx_server
     ignore_errors: yes
     check_mode: yes
+
+   name: Installing nginx server
+    shell: 
+       "yum install nginx -y"
+    when: nginx_server is changed
    
   - name: report if nginx exists
     debug:
       msg: "The nginx server already exists, skipping to next task"
     when: nginx_server is not changed
 
-  - name: Installing nginx server
-    shell: 
-       "yum install nginx -y"
-    when: nginx_server is changed
 
   - name: clonning bugx_site folder from github
     ansible.builtin.git:
