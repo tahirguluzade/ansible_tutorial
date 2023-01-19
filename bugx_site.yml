@@ -45,7 +45,7 @@
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:tahirguluzade/bugx_site.git
-      dest: /var/www/
+      dest: /var/www/bugx_site
 
   - name: making configuration in /etc/nginx/nginx.conf
     shell: 
