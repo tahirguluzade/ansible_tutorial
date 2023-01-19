@@ -30,7 +30,7 @@
     ignore_errors: yes
     check_mode: yes
 
-   name: Installing nginx server
+  - name: Installing nginx server
     shell: 
        "yum install nginx -y"
     when: nginx_server is changed
