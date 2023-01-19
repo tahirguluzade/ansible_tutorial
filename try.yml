@@ -6,9 +6,9 @@
 
   
   - name: Replace between the expressions
-  ansible.builtin.replace:
-  path: /etc/nginx/nginx.conf
-  regexp: 'listen  80 default_server;'
+    ansible.builtin.replace:
+      path: /etc/nginx/nginx.conf
+      regexp: 'listen  80 default_server;'
 
 
             
