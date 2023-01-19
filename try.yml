@@ -12,22 +12,5 @@
   tags: tag1
 
             
-  - name:
-  ansible.builtin.blockinfile:
-  path: /etc/nginx/nginx.conf
-  block: |
-    server {
-        listen 80;
-        server_name www.bugx.site;
-        root /var/www/bugx_site;
-        index index.html;
-        location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        include fastcgi.conf;
-        fastcgi_index index.php;
-        fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
-      }
-    }
 
   
