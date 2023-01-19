@@ -6,39 +6,32 @@
 
 
   - name: Check if httpd already exists
-    shell:
-        "rpm -qa | grep httpd"
-    register: httpd_server
-    ignore_errors: yes
-    check_mode: yes
+    package_facts:
+      manager: "auto"
 
   - name: Installing http service
     shell: 
        "yum install httpd -y"
-    when: httpd_server is not changed
+    when: "'httpd' not in ansible_facts.packages"
 
   - name: report if httpd exists
     debug:
       msg: "The httpd server already exists, skipping to next task"
-    when: httpd_server is changed
-
+    when: "'httpd' in ansible_facts.packages"
 
   - name: Check if nginx already exists
-    shell:
-       "rpm -qa | grep nginx"
-    register: nginx_server
-    ignore_errors: yes
-    check_mode: yes
+    package_facts:
+      manager: "auto"
 
   - name: Installing nginx server
     shell: 
        "yum install nginx -y"
-    when: nginx_server is not changed
+    when: "'nginx' not in ansible_facts.packages"
    
   - name: report if nginx exists
     debug:
       msg: "The nginx server already exists, skipping to next task"
-    when: nginx_server is changed
+    when: "'nginx' in ansible_facts.packages"
 
 
   - name: clonning bugx_site folder from github
@@ -64,23 +57,18 @@
       enabled: yes
       state: started
 
-
-  - name: check if firewalld service installed
-    shell: | 
-      rpm -qa | grep firewalld
-    register: firewalld_installed
-    ignore_errors: true
-    check_mode: yes
+  - name: Check if firewalld already exists
+    package_facts:
+      manager: "auto"
 
   - name: installing firewalld service
     shell:
        "yum install firewalld -y"
-    when: firewalld_installed is not changed
+    when: "'firewalld' not in ansible_facts.packages"
 
   - debug:
       msg: "firewalld service is already installed"
-    when: firewalld_installed is changed
-
+    when: "'firewalld' in ansible_facts.packages"
 
 
   - name: enable and start service firewalld
