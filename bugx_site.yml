@@ -5,7 +5,7 @@
   tasks:
 
 
-  - name: Check if httpd already exists
+  - name: Checking if httpd service already exists in system
     package_facts:
       manager: "auto"
 
@@ -16,25 +16,25 @@
 
   - name: report if httpd exists
     debug:
-      msg: "The httpd server already exists, skipping to next task"
+      msg: "The httpd service already exists in the sytem, so skipping to next task"
     when: "'httpd' in ansible_facts.packages"
 
-  - name: Check if nginx already exists
+  - name: Checking if nginx service already exists in the system
     package_facts:
       manager: "auto"
 
-  - name: Installing nginx server
+  - name: Installing nginx service
     shell: 
        "yum install nginx -y"
     when: "'nginx' not in ansible_facts.packages"
    
-  - name: report if nginx exists
+  - name: reporting if nginx service exists
     debug:
-      msg: "The nginx server already exists, skipping to next task"
+      msg: "The nginx service already exists in the sytem, so skipping to next task"
     when: "'nginx' in ansible_facts.packages"
 
 
-  - name: clonning bugx_site folder from github
+  - name: clonning bugx_site repository from github
     ansible.builtin.git:
       accept_hostkey: true
       repo: git@github.com:tahirguluzade/bugx_site.git
@@ -44,20 +44,19 @@
     shell: 
        "rm -rf /etc/nginx/nginx.conf"
 
-
-  - name: finilizing configuration
+  - name: finishing configuration
     copy:
       src: /root/ansible_tutorial/nginx.conf
       dest: /etc/nginx/
 
 
-  - name: enable and start nginx server
+  - name: enable and start nginx service
     systemd:
       name: nginx
       enabled: yes
       state: started
 
-  - name: Check if firewalld already exists
+  - name: Check if firewalld service already exists in the sytem
     package_facts:
       manager: "auto"
 
@@ -67,7 +66,7 @@
     when: "'firewalld' not in ansible_facts.packages"
 
   - debug:
-      msg: "firewalld service is already installed"
+      msg: "firewalld service is already installed in the system, so skipping to next task"
     when: "'firewalld' in ansible_facts.packages"
 
 
@@ -90,17 +89,25 @@
       permanent: yes
       state: enabled
 
-  - name: reload service firewalld
+  - name: giving output of opened ports and added services in firewalld
+    shell:
+       "firewall-cmd --list-all"
+    register: result
+
+  - debug:
+        var: result.stdout_lines
+
+  - name: reload firewalld service
     systemd:
       name: firewalld
       state: reloaded
 
-  - name: restart service firewalld
+  - name: restart firewalld restart
     systemd:
       name: firewalld
       state: restarted
 
-  - name: restarting nginx server
+  - name: restarting nginx service
     systemd:
       name: nginx
       state: restarted
