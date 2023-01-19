@@ -12,7 +12,7 @@
     ansible.builtin.replace:
       path: /etc/nginx/nginx.conf
       after: '/etc/nginx/conf.d/*.conf;'
-      before: 'location = /50x.htm'
+      before: 'location = /50x.html'
       regexp: 'server {
                listen       80 default_server;
                 listen       [::]:80 default_server;
@@ -31,21 +31,21 @@
 
                 error_page 500 502 503 504 /50x.html;
                     location = /50x.html {
-                }
-            }'
+                  }
+                 }'
       replace: 'server {
-            listen 80;
-            server_name www.bugx.site;
-            root /var/www/bugx_site;
-            index index.html;
-            location ~ \.php$ {
-            try_files $uri =404;
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            include fastcgi.conf;
-            fastcgi_index index.php;
-            fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
-              }
-            }'
+                listen 80;
+                server_name www.bugx.site;
+                root /var/www/bugx_site;
+                index index.html;
+                location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                include fastcgi.conf;
+                fastcgi_index index.php;
+                fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
+                  }
+                }'
 
 
             
