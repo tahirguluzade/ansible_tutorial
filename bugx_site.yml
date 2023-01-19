@@ -46,8 +46,8 @@
       dest: /var/www/
 
   - name: making configuration in /etc/nginx/nginx.conf
-  shell: 
-     "rm -rf /etc/nginx/nginx.conf"
+    shell: 
+       "rm -rf /etc/nginx/nginx.conf"
 
 
   - name: finilizing configuration
