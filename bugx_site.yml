@@ -75,7 +75,7 @@
       name: firewalld
       enabled: yes
       state: started
-
+      
 
   - name: to permit traffic in default zone for http service
     firewalld:
@@ -120,7 +120,7 @@
 
   - debug:
         var: nginx_status.stdout_lines
-        
+
 
 
 
