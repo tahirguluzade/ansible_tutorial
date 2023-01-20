@@ -77,7 +77,7 @@
       state: started
 
 
-  - name: permit traffic in default zone for http service
+  - name: to permit traffic in default zone for http service
     firewalld:
       service: http
       permanent: yes
@@ -111,5 +111,16 @@
     systemd:
       name: nginx
       state: restarted
+
+  - name: checking status of the nginx service
+    shell: |
+      systemctl status nginx
+    register: nginx_status
+
+
+  - debug:
+        var: nginx_status.stdout_lines
+        
+
 
 
