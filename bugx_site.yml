@@ -46,7 +46,7 @@
 
   - name: finishing configuration
     copy:
-      src: /root/ansible_tutorial/nginx.conf
+      src: /home/tahirguluzada/nginx.conf
       dest: /etc/nginx/
 
 
