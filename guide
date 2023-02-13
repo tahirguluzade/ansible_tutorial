@@ -1,0 +1,31 @@
+#deploying git repository to linux machine
+#create ssh key in github account
+git clone <url which cloned with ssh>
+#telling to git who we are
+git config --global user.name "username"
+git config --global user.email "email address"
+#All this information is stored under ~/.gitconfig file
+#######3
+#show difference that what changed
+git diff filename
+#add file
+git add filename
+#adding commit message
+git commit -m "type comment"
+#pushing changes to origin 
+git push origin <branch name (main, master)>
+
+
+
+####################################################
+#to ping all servers at the same time
+ansible all --key-file -i <inventory file> -m ping
+#sometimes it can be give error, so then you need to specify user names in inventory file
+#18.216.214.157 ansible_user=<username of server>
+#3.131.160.87   ansible_user=<username of server>
+#18.219.133.241 ansible_user=<username of server>
+##############################
+##
+#to install packages for all servers using ansible 
+ansible all -m yum -a name=packagename --become --ask-become-pass
+#then enter and type password of root
