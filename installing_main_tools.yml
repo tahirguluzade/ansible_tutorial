@@ -11,8 +11,8 @@
   - name: Installing Git 
     yum: 
       name: git
-      state:present
-      when: "'git' not in ansible_facts.packages"
+      state: present
+    when: "'git' not in ansible_facts.packages"
   
   - name: report if git already exists 
     debug:
