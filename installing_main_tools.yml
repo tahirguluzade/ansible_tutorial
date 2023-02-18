@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Checking if "Git" already exists in system 
+    package_facts: 
+      manager: "auto"
+
+  - name: Installing Git 
+    yum: 
+      name: git
+      state:present
+      when: "'git' not in ansible_facts.packages"
+  
+  - name: report if git already exists 
+    debug:
+      msg: "The git already exists in the system, so skipping to next task"
+    when: "'git' in ansible_facts.packages"
