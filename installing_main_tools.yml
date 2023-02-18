@@ -23,3 +23,4 @@
     yum: 
       name: lsof
       state: present
+    when: "'lsof' not in ansible_facts.packages"
