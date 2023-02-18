@@ -24,3 +24,8 @@
       name: lsof
       state: present
     when: "'lsof' not in ansible_facts.packages"
+
+  - name: report if "lsof" already exists 
+    debug:
+      msg: "The "lsof" command already exists in the system, so skipping to next task"
+    when: "'lsof' in ansible_facts.packages"
