@@ -18,3 +18,8 @@
     debug:
       msg: "The git already exists in the system, so skipping to next task"
     when: "'git' in ansible_facts.packages"
+
+  - name: installing lsof command
+    yum: 
+      name: lsof
+      state: present
