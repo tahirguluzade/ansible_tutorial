@@ -61,7 +61,7 @@
         
   - name: Copy systemd init file
     template:
-      src: /home/ansible/exporter.service
+      src: /home/ansible/ansible_tutorial/exporter.service
       dest: /etc/systemd/system/node_exporter.service
  
   - name: Start node_exporter service
