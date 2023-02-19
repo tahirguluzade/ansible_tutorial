@@ -1,0 +1,126 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+  - name: Checking if httpd service already exists in system
+    package_facts:
+      manager: "auto"
+
+  - name: Installing http service
+    shell: 
+       "yum install httpd -y"
+    when: "'httpd' not in ansible_facts.packages"
+
+  - name: report if httpd exists
+    debug:
+      msg: "The httpd service already exists in the sytem, so skipping to next task"
+    when: "'httpd' in ansible_facts.packages"
+
+  - name: Checking if nginx service already exists in the system
+    package_facts:
+      manager: "auto"
+
+  - name: Installing nginx service
+    shell: 
+       "yum install nginx -y"
+    when: "'nginx' not in ansible_facts.packages"
+   
+  - name: reporting if nginx service exists
+    debug:
+      msg: "The nginx service already exists in the sytem, so skipping to next task"
+    when: "'nginx' in ansible_facts.packages"
+
+
+  - name: clonning bugx_site repository from github
+    ansible.builtin.git:
+      accept_hostkey: true
+      repo: git@github.com:tahirguluzade/bugx_site.git
+      dest: /var/www/bugx_site
+
+  - name: making configuration in /etc/nginx/nginx.conf
+    shell: 
+       "rm -rf /etc/nginx/nginx.conf"
+
+  - name: finishing configuration
+    copy:
+      src: /home/tahirguluzada/nginx.conf
+      dest: /etc/nginx/
+
+
+  - name: enable and start nginx service
+    systemd:
+      name: nginx
+      enabled: yes
+      state: started
+
+  - name: Check if firewalld service already exists in the sytem
+    package_facts:
+      manager: "auto"
+
+  - name: installing firewalld service
+    shell:
+       "yum install firewalld -y"
+    when: "'firewalld' not in ansible_facts.packages"
+
+  - debug:
+      msg: "firewalld service is already installed in the system, so skipping to next task"
+    when: "'firewalld' in ansible_facts.packages"
+
+
+  - name: enable and start service firewalld
+    systemd:
+      name: firewalld
+      enabled: yes
+      state: started
+      
+
+  - name: to permit traffic in default zone for http service
+    firewalld:
+      service: http
+      permanent: yes
+      state: enabled
+    
+  - name: to permit traffic in default zone on port 80/tcp
+    firewalld:
+      port: 80/tcp
+      permanent: yes
+      state: enabled
+
+  - name: giving output of opened ports and added services in firewalld
+    shell:
+       "firewall-cmd --list-all"
+    register: result
+
+  - debug:
+        var: result.stdout_lines
+
+  - name: reload firewalld service
+    systemd:
+      name: firewalld
+      state: reloaded
+
+  - name: restart firewalld restart
+    systemd:
+      name: firewalld
+      state: restarted
+
+  - name: restarting nginx service
+    systemd:
+      name: nginx
+      state: restarted
+
+  - name: checking status of the nginx service
+    shell: |
+      systemctl status nginx
+    register: nginx_status
+
+
+  - debug:
+        var: nginx_status.stdout_lines
+
+
+
+

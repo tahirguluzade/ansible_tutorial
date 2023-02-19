@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: installing apache webserver in ubuntu based servers
+    apt: 
+      name: apache2
+      state: latest
+    when: ansible_distribution == "Ubuntu"
