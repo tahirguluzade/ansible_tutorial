@@ -63,7 +63,7 @@
 
   - name: built "prometheus service"
     template:
-      src: /home/ansible/ansible_tutorial/Services/prometheus.service
+      src: /home/ansible/ansible_tutorial/Services/Prometheus.service
       dest: /etc/systemd/system/prometheus.service
  
   - name: Start prometheus service
