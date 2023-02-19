@@ -1,5 +1,5 @@
 [Unit]
-Description={{ServiceName}}
+Description={{serviceName}}
 Wants=network-online.target
 After=network-online.target
  
