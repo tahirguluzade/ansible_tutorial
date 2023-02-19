@@ -7,7 +7,6 @@ After=network-online.target
 User={{ user }}
 Group={{ group }}
 Restart=on-failure
-
 ExecStart={{ prometheusexec_command }}
 
 
