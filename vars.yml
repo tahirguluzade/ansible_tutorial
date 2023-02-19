@@ -8,4 +8,5 @@ nodeservice_name: "node_exporter"
 exec_command: /usr/local/bin/node_exporter
 prometheusexec_command: /usr/local/bin/prometheus/prometheus --config.file=/usr/local/bin/prometheus/prometheus.yml --storage.tsdb.path=/usr/local/bin/prometheus/data
 git_version: /usr/bin/git --version
+ansible_userhome: /home/ansible
                         
