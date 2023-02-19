@@ -26,16 +26,16 @@
 
  
   - name: Creating node_exporter user group
-    group: name="{{groupId}}"
+    group: name="{{ group }}"
     become: true
  
   - name: Creating node_exporter user
     user:
-      name: "{{userId}}"
-      group: "{{groupId}}"
+      name: "{{ user }}"
+      group: "{{ group }}"
       system: yes
       shell: "/sbin/nologin"
-      comment: "{{userId}} nologin User"
+      comment: "{{ user }} nologin User"
       createhome: "no"
       state: present
  
@@ -49,8 +49,8 @@
     copy:
       src: "/tmp/node_exporter-{{version}}.linux-amd64/node_exporter"
       dest: "/usr/local/bin/node_exporter"
-      owner: "{{userId}}"
-      group: "{{groupId}}"
+      owner: "{{ user }}"
+      group: "{{ group }}"
       remote_src: yes
       mode: 0755
  
