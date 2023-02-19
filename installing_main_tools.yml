@@ -63,7 +63,7 @@
 
   - name: built "prometheus service"
     template:
-      src: {{ansible_userhome}}/ansible_tutorial/Services/prometheus.service
+      src: /home/ansible/ansible_tutorial/Services/prometheus.service
       dest: /etc/systemd/system/prometheus.service
  
   - name: Start prometheus service
@@ -95,7 +95,7 @@
 
   - name: Copy systemd init file
     template:
-      src: {{ansible_userhome}}/ansible_tutorial/exporter.service
+      src: /home/ansible/ansible_tutorial/exporter.service
       dest: /etc/systemd/system/node_exporter.service
  
   - name: Start node_exporter service
