@@ -6,6 +6,11 @@
   - vars.yml
   tasks:
 
+
+  name: Checking if git already exists in the system
+  package_facts:
+    manager: "auto"
+
   - name: Installing Git 
     yum: 
       name: git
