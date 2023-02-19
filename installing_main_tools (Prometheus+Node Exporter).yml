@@ -95,7 +95,7 @@
 
   - name: Copy systemd init file
     template:
-      src: /home/ansible/ansible_tutorial/exporter.service
+      src: /home/ansible/ansible_tutorial/Services/exporter.service
       dest: /etc/systemd/system/node_exporter.service
  
   - name: Start node_exporter service
@@ -113,7 +113,7 @@
         #####
           - job_name: 'node_exporter' 
             static_configs:       
-              - targets: ['192.168.134.128:9100'] 
+              - targets: ['localhost:9100'] 
     tags:
     - tag1
 
